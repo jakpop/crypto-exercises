@@ -5,6 +5,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -37,6 +39,18 @@ class CryptoServiceTest {
 
         //then
         assertEquals("alamakota", result);
+    }
+
+    @Test
+    void caesarManualBreakTest() {
+        //given
+        String message = "nynznxbgn";
+
+        //when
+        List<String> result = cryptoService.caesarManualBreak(message);
+
+        //then
+        assertTrue(result.contains("alamakota"));
     }
 
     @Test

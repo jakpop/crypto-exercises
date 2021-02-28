@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/crypto", produces = "application/json")
 @RequiredArgsConstructor
@@ -23,5 +25,10 @@ public class CryptoApi {
     public String caesarDecipher(@RequestParam(value = "message") String message,
                                  @RequestParam(value = "offset") int offset) {
         return cryptoService.caesarDecipher(message, offset);
+    }
+
+    @RequestMapping(value = "/caesar/manual-break")
+    public List<String> caesarManualBreak(@RequestParam(value = "message") String message) {
+        return cryptoService.caesarManualBreak(message);
     }
 }

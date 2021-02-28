@@ -8,7 +8,7 @@ public interface StringValidator extends Function<String, StringValidator.String
     static StringValidator isLowerCaseAlphabet() {
         return s -> s.codePoints()
                 .mapToObj(c -> (char)c)
-                .allMatch(c -> c >= 97 && c <= 122) ? SUCCESS : CHARS;
+                .allMatch(c -> (c >= 97 && c <= 122) || c == 32) ? SUCCESS : CHARS;
     }
 
     enum StringValidationResult {
