@@ -18,6 +18,8 @@ import static com.example.crypto.service.StringValidator.isLowerCaseAlphabet;
 @Slf4j
 public class CryptoService {
 
+    //algorytmy podebrane z baeldunga :)
+
     public String caesarCipher(String message, int offset) {
         validate(message, offset);
 
