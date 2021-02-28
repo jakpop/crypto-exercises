@@ -40,7 +40,7 @@ class CryptoServiceTest {
     }
 
     @Test
-    void validationCaseOfStringTest() {
+    void validationOfStringTest() {
         //given
         String message = "ALAmaKOTA";
         int offset = 13;
