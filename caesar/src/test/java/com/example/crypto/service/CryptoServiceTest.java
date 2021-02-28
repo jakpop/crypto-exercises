@@ -39,4 +39,32 @@ class CryptoServiceTest {
         assertEquals("alamakota", result);
     }
 
+    @Test
+    void validationCaseOfStringTest() {
+        //given
+        String message = "ALAmaKOTA";
+        int offset = 13;
+
+        //when
+        IllegalArgumentException result = assertThrows(IllegalArgumentException.class,
+                () -> cryptoService.caesarCipher(message, offset));
+
+        //then
+        assertEquals("String contains not supported characters", result.getMessage());
+    }
+
+    @Test
+    void validationNegativeOffsetTest() {
+        //given
+        String message = "alamakota";
+        int offset = -13;
+
+        //when
+        IllegalArgumentException result = assertThrows(IllegalArgumentException.class,
+                () -> cryptoService.caesarCipher(message, offset));
+
+        //then
+        assertEquals("Offset is negative", result.getMessage());
+    }
+
 }

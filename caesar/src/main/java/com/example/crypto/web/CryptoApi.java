@@ -21,7 +21,7 @@ public class CryptoApi {
 
     @RequestMapping(value = "/caesar/decipher")
     public String caesarDecipher(@RequestParam(value = "message") String message,
-                               @RequestParam(value = "offset") int offset) {
+                                 @RequestParam(value = "offset") int offset) {
         return cryptoService.caesarDecipher(message, offset);
     }
 }

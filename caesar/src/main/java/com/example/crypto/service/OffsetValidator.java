@@ -11,13 +11,6 @@ public interface OffsetValidator extends IntFunction<OffsetValidator.OffsetValid
         return value -> value > 0 ? SUCCESS : NEGATIVE;
     }
 
-    default OffsetValidator and(OffsetValidator other) {
-        return value -> {
-            OffsetValidationResult result = this.apply(value);
-            return result.equals(SUCCESS) ? other.apply(value) : result;
-        };
-    }
-
     enum OffsetValidationResult {
         SUCCESS("Success"),
         NEGATIVE("Offset is negative");

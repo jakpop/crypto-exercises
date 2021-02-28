@@ -5,8 +5,7 @@ import com.example.crypto.service.OffsetValidator.OffsetValidationResult;
 import org.springframework.stereotype.Service;
 
 import static com.example.crypto.service.OffsetValidator.isPositive;
-import static com.example.crypto.service.StringValidator.isAlphabet;
-import static com.example.crypto.service.StringValidator.isLowerCase;
+import static com.example.crypto.service.StringValidator.isLowerCaseAlphabet;
 
 @Service
 public class CryptoService {
@@ -34,8 +33,7 @@ public class CryptoService {
         OffsetValidator.OffsetValidationResult offsetValidationResult = isPositive()
                 .apply(offset);
 
-        StringValidationResult stringValidationResult = isAlphabet()
-                .and(isLowerCase())
+        StringValidationResult stringValidationResult = isLowerCaseAlphabet()
                 .apply(message);
 
         if (stringValidationResult != StringValidationResult.SUCCESS) {
