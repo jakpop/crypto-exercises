@@ -44,13 +44,25 @@ class CryptoServiceTest {
     @Test
     void caesarManualBreakTest() {
         //given
-        String message = "nynznxbgn";
+        String message = "uryyb jbeyq guvf vf pnrfne pvcure oernx nggrzcg";
 
         //when
         List<String> result = cryptoService.caesarManualBreak(message);
 
         //then
-        assertTrue(result.contains("alamakota"));
+        assertTrue(result.contains("hello world this is caesar cipher break attempt"));
+    }
+
+    @Test
+    void caesarAutoBreakTest() {
+        //given
+        String message = "uryyb jbeyq guvf vf pnrfne pvcure oernx nggrzcg";
+
+        //when
+        String result = cryptoService.caesarAutoBreak(message);
+
+        //then
+        assertEquals("hello world this is caesar cipher break attempt", result);
     }
 
     @Test

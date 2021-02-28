@@ -31,4 +31,9 @@ public class CryptoApi {
     public List<String> caesarManualBreak(@RequestParam(value = "message") String message) {
         return cryptoService.caesarManualBreak(message);
     }
+
+    @RequestMapping(value = "/caesar/auto-break")
+    public String caesarAutoBreak(@RequestParam(value = "message") String message) {
+        return cryptoService.caesarAutoBreak(message);
+    }
 }

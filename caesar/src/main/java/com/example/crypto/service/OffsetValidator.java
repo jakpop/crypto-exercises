@@ -8,7 +8,7 @@ import static com.example.crypto.service.OffsetValidator.OffsetValidationResult.
 public interface OffsetValidator extends IntFunction<OffsetValidator.OffsetValidationResult> {
 
     static OffsetValidator isPositive() {
-        return value -> value > 0 ? SUCCESS : NEGATIVE;
+        return value -> value >= 0 ? SUCCESS : NEGATIVE;
     }
 
     enum OffsetValidationResult {
