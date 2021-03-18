@@ -16,10 +16,7 @@ class User(object):
     def init(self, username: str, password: str) -> None:
         self.username = username
         self.password_salt = ''.join(random.choices(string.ascii_lowercase + string.digits, k=32))
-        self.password_hash = hl.sha256((password + self.password_salt).encode()).hexdigest()
+        self.password_hash = hl.pbkdf2_hmac('sha256', password.encode(), self.password_salt.encode(), 100000).hex()
 
     def check_password(self, password: str) -> bool:
-        return hl.sha256((password + self.password_salt).encode()).hexdigest() == self.password_hash
-
-
-
+        return hl.pbkdf2_hmac('sha256', password.encode(), self.password_salt.encode(), 100000).hex() == self.password_hash
