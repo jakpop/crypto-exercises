@@ -1,6 +1,7 @@
 import sqlite3
 
 from src.db_controller import DbController
+from src.user import User
 from src.user_service import UserService
 
 if __name__ == '__main__':
@@ -18,7 +19,9 @@ if __name__ == '__main__':
     print()
 
     if password == password_check:
-        user = us.register(username=username, password=password)
+        user = User()
+        user.init(username=username, password=password)
+        user = us.register(user)
         print('Successfully saved user')
     else:
         print('Password doesnt match')
@@ -26,4 +29,4 @@ if __name__ == '__main__':
     print("\n==LOGIN==")
     username = input('Enter username: ')
     password = input('Enter your password: ')
-    us.login(username, password)
+    print(us.login(username, password))
