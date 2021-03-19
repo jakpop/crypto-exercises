@@ -3,7 +3,7 @@ from unittest import TestCase
 from unittest.mock import patch
 
 import mockito
-from mockito import when, verifyNoUnwantedInteractions
+from mockito import when, verifyNoUnwantedInteractions, mock
 
 from src.user import User
 from src.user_service import UserService
@@ -14,9 +14,7 @@ class TestUserService(TestCase):
 
     def test_login_correct(self):
         # given
-        con = sqlite3.connect('mock_db')
-        cur = con.cursor()
-        db = DbController(con, cur)
+        db = mock(DbController)
         us = UserService(db)
 
         u = User()
@@ -36,9 +34,7 @@ class TestUserService(TestCase):
 
     def test_login_incorrect(self):
         # given
-        con = sqlite3.connect('mock_db')
-        cur = con.cursor()
-        db = DbController(con, cur)
+        db = mock(DbController)
         us = UserService(db)
 
         u = User()
@@ -58,9 +54,7 @@ class TestUserService(TestCase):
 
     def test_register(self):
         # given
-        con = sqlite3.connect('mock_db')
-        cur = con.cursor()
-        db = DbController(con, cur)
+        db = mock(DbController)
         us = UserService(db)
 
         u = User()
