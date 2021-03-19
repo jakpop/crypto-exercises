@@ -16,6 +16,7 @@ class UserService(object):
         :param password: password of the user wanting to log in
         :return: login message
         """
+
         user = self.db.get_user_by_username(username)
         if user.check_password(password=password):
             return f'{user.username} login successful'
