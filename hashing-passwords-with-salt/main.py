@@ -21,7 +21,7 @@ if __name__ == '__main__':
     if password == password_check:
         user = User()
         user.init(username=username, password=password)
-        user = us.register(user)
+        us.register(user)
         print('Successfully saved user')
     else:
         print('Password doesnt match')

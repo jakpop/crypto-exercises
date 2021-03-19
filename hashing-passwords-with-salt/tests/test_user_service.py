@@ -1,8 +1,4 @@
-import sqlite3
 from unittest import TestCase
-from unittest.mock import patch
-
-import mockito
 from mockito import when, verifyNoUnwantedInteractions, mock
 
 from src.user import User
