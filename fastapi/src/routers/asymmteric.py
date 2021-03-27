@@ -30,10 +30,10 @@ async def sign_key():
 
 @router.post("/asymmetric/encode/", tags=['asymmetric'])
 async def encrypt_message(message: str):
-    return None
+    return message
 
 
 @router.post("/asymmetric/decode/", tags=['asymmetric'])
 async def decrypt_message(message: str):
-    return None
+    return message
 
