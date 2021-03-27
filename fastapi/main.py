@@ -5,8 +5,8 @@ from src.routers import asymmteric
 
 app = FastAPI()
 
-app.include_router(symmetric.router)
-app.include_router(asymmteric.router)
+app.include_router(symmetric.router, prefix='/symmetric', tags=['symmetric'])
+app.include_router(asymmteric.router, prefix='/asymmetric', tags=['asymmetric'])
 
 
 @app.get("/")

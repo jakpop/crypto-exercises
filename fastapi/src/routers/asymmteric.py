@@ -3,37 +3,37 @@ from fastapi import APIRouter
 router = APIRouter()
 
 
-@router.get("/asymmetric/key/", tags=['asymmetric'])
+@router.get("/key")
 async def get_key():
     return None
 
 
-@router.get("/asymmetric/key/ssh", tags=['asymmetric'])
+@router.get("/key/ssh")
 async def get_key_ssh():
     return None
 
 
-@router.post("/asymmetric/key/", tags=['asymmetric'])
+@router.post("/key")
 async def post_key():
     return None
 
 
-@router.post("/asymmetric/verify/", tags=['asymmetric'])
+@router.post("/verify")
 async def verify_key():
     return None
 
 
-@router.post("/asymmetric/sign/", tags=['asymmetric'])
+@router.post("/sign")
 async def sign_key():
     return None
 
 
-@router.post("/asymmetric/encode/", tags=['asymmetric'])
+@router.post("/encode")
 async def encrypt_message(message: str):
     return message
 
 
-@router.post("/asymmetric/decode/", tags=['asymmetric'])
+@router.post("/decode")
 async def decrypt_message(message: str):
     return message
 
