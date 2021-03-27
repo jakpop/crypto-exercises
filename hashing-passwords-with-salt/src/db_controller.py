@@ -1,4 +1,6 @@
+import logging
 import sqlite3
+from collections import namedtuple
 
 from src.user import User
 
@@ -59,13 +61,16 @@ class DbController(object):
         :rtype: User
         """
 
+        UserRecord = namedtuple('UserRecord', 'username, password_salt, password')
+
         query = f'''SELECT username, password_salt, password from passwords WHERE username = '{username}' '''
-        result = self.cur.execute(query).fetchall()
         try:
+            self.cur.execute(query)
             user = User()
-            user.username = result[0][0]
-            user.password_salt = result[0][1]
-            user.password_hash = result[0][2]
+            for user_fetched in map(UserRecord._make, self.cur.fetchall()):
+                user.username = user_fetched.username
+                user.password_salt = user_fetched.password_salt
+                user.password_hash = user_fetched.password
             self.con.commit()
         except Exception as e:
             raise self.con.DatabaseError(f'User does not exist: {str(e)}')
