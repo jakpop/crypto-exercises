@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from src.model.Key import Key
+from src.model.key import Key
 from src.service.cryptography_service import CryptographyService
 
 router = APIRouter()
@@ -13,7 +13,7 @@ async def get_key():
 
 
 @router.post("/key")
-async def post_key(key: Key):
+async def post_key(key: Key) -> Key:
     cs.set_symmetric_key(key)
     return key
 
