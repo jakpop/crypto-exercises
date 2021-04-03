@@ -29,11 +29,11 @@ async def sign_key():
 
 
 @router.post("/encode")
-async def encrypt_message(message: str):
+async def encrypt_message(message: str) -> str:
     return message
 
 
 @router.post("/decode")
-async def decrypt_message(message: str):
+async def decrypt_message(message: str) -> str:
     return message
 

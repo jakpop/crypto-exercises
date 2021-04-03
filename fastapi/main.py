@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
-from src.routers import symmetric
-from src.routers import asymmteric
+from src.web import symmetric
+from src.web import asymmteric
 
 app = FastAPI()
 
