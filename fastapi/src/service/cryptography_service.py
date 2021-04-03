@@ -1,11 +1,13 @@
 import base64
 import logging
 
-from cryptography.fernet import Fernet
+from cryptography.exceptions import InvalidSignature
+from cryptography.fernet import Fernet, InvalidToken
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.primitives import hashes
+from fastapi import HTTPException
 
 from src.model.asymmetric_key import AsymmetricKey
 from src.model.key import Key
@@ -32,7 +34,10 @@ class CryptographyService:
         return self.fernet.encrypt(data=message.encode())
 
     def decrypt_symmetric(self, token: bytes) -> bytes:
-        return self.fernet.decrypt(token)
+        try:
+            return self.fernet.decrypt(token)
+        except InvalidToken:
+            raise HTTPException(status_code=400, detail="Wrong token, couldn't decrypt message")
 
     def get_asymmetric_key(self):
         private_key = rsa.generate_private_key(
@@ -96,15 +101,18 @@ class CryptographyService:
 
     def verify_message(self, signature: str, message: str):
         public_key = self.key_service.get_asymmetric_public_key()
-        serialization.load_pem_public_key(public_key).verify(
-            base64.b64decode(signature),
-            message.encode(),
-            padding.PSS(
-                mgf=padding.MGF1(hashes.SHA256()),
-                salt_length=padding.PSS.MAX_LENGTH
-            ),
-            hashes.SHA256()
-        )
+        try:
+            serialization.load_pem_public_key(public_key).verify(
+                base64.b64decode(signature),
+                message.encode(),
+                padding.PSS(
+                    mgf=padding.MGF1(hashes.SHA256()),
+                    salt_length=padding.PSS.MAX_LENGTH
+                ),
+                hashes.SHA256()
+            )
+        except InvalidSignature as e:
+            raise HTTPException(status_code=400, detail=f"Wrong signature or message. ")
 
     def encrypt_asymmetric(self, message: str) -> bytes:
         public_key = self.key_service.get_asymmetric_public_key()
