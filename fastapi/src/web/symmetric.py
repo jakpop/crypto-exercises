@@ -9,21 +9,40 @@ cs = CryptographyService()
 
 @router.get("/key")
 async def get_key():
+    """
+    Generates a key with symmetric encryption
+    :return: dict containing the key
+    """
     return {"key": cs.get_symmetric_key()}
 
 
 @router.post("/key")
 async def post_key(key: Key) -> Key:
+    """
+    Sets a key for symmetric encryption on the server
+    :param key: Key to be set
+    :return: the same key passed in request
+    """
     cs.set_symmetric_key(key)
     return key
 
 
 @router.post("/encode")
 async def encrypt_message(message: str) -> bytes:
+    """
+    Encrypts a message using symmetric encryption
+    :param message: Message to be encrypted
+    :return: Encrypted message
+    """
     return cs.encrypt_symmetric(message)
 
 
 @router.post("/decode")
 async def decrypt_message(token: str) -> bytes:
+    """
+    Decrypts a message using symmetric encryption
+    :param token: Encrypted message to be decrypted
+    :return: Decrypted message
+    """
     return cs.decrypt_symmetric(token.encode())
 

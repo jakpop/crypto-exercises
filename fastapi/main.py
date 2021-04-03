@@ -10,7 +10,6 @@ app.include_router(symmetric.router, prefix='/symmetric', tags=['symmetric'])
 app.include_router(asymmteric.router, prefix='/asymmetric', tags=['asymmetric'])
 
 
-# TODO docstrings
 # TODO exception handling
 # TODO unit tests
 
