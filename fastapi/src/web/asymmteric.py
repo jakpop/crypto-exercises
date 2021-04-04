@@ -1,7 +1,6 @@
 from fastapi import APIRouter
 
 from src.model.asymmetric_key import AsymmetricKey
-from src.model.key import Key
 from src.model.message import Message
 from src.model.verify_model import VerifyModel
 from src.service.cryptography_service import CryptographyService

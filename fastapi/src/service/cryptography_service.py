@@ -25,7 +25,7 @@ class CryptographyService:
         logging.basicConfig(level=logging.DEBUG)
 
     def get_symmetric_key(self) -> bytes:
-        return Fernet.generate_key()
+        return self.fernet.generate_key()
 
     def set_symmetric_key(self, key_model: Key):
         self.key_service.set_symmetric_key(key_model.key)
