@@ -24,7 +24,7 @@ class CryptographyService:
         self.fernet = Fernet(Fernet.generate_key())
         logging.basicConfig(level=logging.DEBUG)
 
-    def get_symmetric_key(self):
+    def get_symmetric_key(self) -> bytes:
         return Fernet.generate_key()
 
     def set_symmetric_key(self, key_model: Key):
@@ -111,8 +111,8 @@ class CryptographyService:
                 ),
                 hashes.SHA256()
             )
-        except InvalidSignature as e:
-            raise HTTPException(status_code=400, detail=f"Wrong signature or message. ")
+        except InvalidSignature:
+            raise HTTPException(status_code=400, detail=f"Wrong signature or message.")
 
     def encrypt_asymmetric(self, message: str) -> bytes:
         public_key = self.key_service.get_asymmetric_public_key()
